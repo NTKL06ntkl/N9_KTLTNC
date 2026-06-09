@@ -1,7 +1,7 @@
 # INTERFACE.md — Hệ thống Quản lý Khóa học & Đăng ký Tín chỉ
 
-> **Mục đích:** File này liệt kê toàn bộ class, hàm, tham số, kiểu trả về và exception của tất cả module.
-> Mọi người đọc file này để biết cách gọi code của nhau **mà không cần đọc toàn bộ source**.
+> **Mục đích:** File này liệt kê toàn bộ class, hàm, tham số, kiểu trả về và ngoại lệ của tất cả module.
+> Mọi người đọc file này để biết cách gọi code của nhau **mà không cần đọc toàn bộ mã nguồn**.
 
 ---
 
@@ -31,7 +31,7 @@ course-management/
 │   └── screen_admin.py     # P5
 ├── data/
 │   ├── data_mau.py         # P2
-│   └── data.json           # P5 (sinh ra khi save)
+│   └── data.json           # P5 (sinh ra khi lưu)
 ├── tests/
 └── main.py
 ```
@@ -40,7 +40,7 @@ course-management/
 
 ## Module: `logic/mon_hoc.py` — **P1**
 
-### Class `MonHoc`
+### Lớp `MonHoc`
 
 ```python
 MonHoc(ma_mon: str, ten_mon: str, so_tin_chi: int, ma_mon_tien_quyet: str | None = None)
@@ -63,7 +63,7 @@ m2 = MonHoc("CS201", "Cấu trúc dữ liệu", 3, ma_mon_tien_quyet="CS101")
 
 ## Module: `logic/lop_hoc_phan.py` — **P1**
 
-### Class `LopHocPhan`
+### Lớp `LopHocPhan`
 
 ```python
 LopHocPhan(ma_lop_hp: str, mon_hoc: MonHoc, giang_vien: str, si_so_toi_da: int)
@@ -75,24 +75,24 @@ LopHocPhan(ma_lop_hp: str, mon_hoc: MonHoc, giang_vien: str, si_so_toi_da: int)
 | `mon_hoc` | `MonHoc` | Đối tượng MonHoc (không phải chỉ mã) |
 | `giang_vien` | `str` | Tên giảng viên |
 | `si_so_toi_da` | `int` | Số sinh viên tối đa |
-| `danh_sach_sv` | `DoublyLinkedList` | Danh sách SinhVien đã đăng ký (P3 cung cấp) |
+| `danh_sach_sv` | `DanhSachLienKetDoi` | Danh sách SinhVien đã đăng ký (P3 cung cấp) |
 | `lich_hoc` | `dict` | `{"thu": int, "tiet_bat_dau": int, "tiet_ket_thuc": int}` |
 
 #### Hàm `them_sv(sv: SinhVien) -> None`
 - Thêm sinh viên vào `danh_sach_sv`
-- **Raises:** `FullCapacityError` nếu `is_full()` trả về `True`
+- **Ngoại lệ:** `LoiLopHocDayCho` nếu `la_day()` trả về `True`
 
 #### Hàm `xoa_sv(sv: SinhVien) -> None`
 - Xóa sinh viên khỏi `danh_sach_sv`
 
-#### Hàm `is_full() -> bool`
+#### Hàm `la_day() -> bool`
 - Trả về `True` nếu `len(danh_sach_sv) >= si_so_toi_da`
 
 **Ví dụ sử dụng:**
 ```python
 lop = LopHocPhan("CS101-01", m1, "Nguyễn Văn A", 30)
 lop.them_sv(sv)      # thêm SV vào lớp
-lop.is_full()        # → True/False
+lop.la_day()         # → True/False
 lop.xoa_sv(sv)       # xóa SV khỏi lớp
 ```
 
@@ -100,7 +100,7 @@ lop.xoa_sv(sv)       # xóa SV khỏi lớp
 
 ## Module: `logic/sinh_vien.py` — **P2**
 
-### Class `SinhVien`
+### Lớp `SinhVien`
 
 ```python
 SinhVien(ma_sv: str, ho_ten: str, lop_sh: str)
@@ -111,8 +111,8 @@ SinhVien(ma_sv: str, ho_ten: str, lop_sh: str)
 | `ma_sv` | `str` | Mã sinh viên (VD: "SV001") |
 | `ho_ten` | `str` | Họ và tên đầy đủ |
 | `lop_sh` | `str` | Lớp sinh hoạt (VD: "CNTT01") |
-| `ds_mon_da_hoc` | `HashSet` | Tập hợp mã môn đã hoàn thành (P3) |
-| `ds_mon_dang_ky` | `DoublyLinkedList` | Danh sách `LopHocPhan` đang đăng ký (P3) |
+| `ds_mon_da_hoc` | `TapHopBam` | Tập hợp mã môn đã hoàn thành (P3) |
+| `ds_mon_dang_ky` | `DanhSachLienKetDoi` | Danh sách `LopHocPhan` đang đăng ký (P3) |
 
 #### Hàm `tinh_dtb() -> float`
 - Tính điểm trung bình có trọng số theo số tín chỉ
@@ -123,12 +123,12 @@ SinhVien(ma_sv: str, ho_ten: str, lop_sh: str)
 - Trả về `True` nếu đủ điều kiện hoặc môn không có tiên quyết
 
 #### Hàm `dang_ky(lop_hp: LopHocPhan) -> None`
-- Thêm `lop_hp` vào `ds_mon_dang_ky` của SV
-- Đồng thời gọi `lop_hp.them_sv(self)` để đồng bộ 2 chiều
+- Thêm `lop_hp` vào `ds_mon_dang_ky` của sinh viên
+- Đồng thời gọi `lop_hp.them_sv(self)` để đồng bộ hai chiều
 
 #### Hàm `huy_dang_ky(lop_hp: LopHocPhan) -> None`
-- Xóa `lop_hp` khỏi `ds_mon_dang_ky` của SV
-- Đồng thời gọi `lop_hp.xoa_sv(self)` để đồng bộ 2 chiều
+- Xóa `lop_hp` khỏi `ds_mon_dang_ky` của sinh viên
+- Đồng thời gọi `lop_hp.xoa_sv(self)` để đồng bộ hai chiều
 
 **Ví dụ sử dụng:**
 ```python
@@ -143,54 +143,54 @@ sv.huy_dang_ky(lop_cs101_01)           # hủy đăng ký
 
 ## Module: `data_structures/doubly_linked_list.py` — **P3**
 
-### Class `DoublyLinkedList`
+### Lớp `DanhSachLienKetDoi`
 
 ```python
-DoublyLinkedList()
+DanhSachLienKetDoi()
 ```
 
 | Hàm | Tham số | Trả về | Mô tả |
 |---|---|---|---|
-| `append(data)` | `data: any` | `None` | Thêm vào cuối |
-| `prepend(data)` | `data: any` | `None` | Thêm vào đầu |
-| `remove(data)` | `data: any` | `None` | Xóa node chứa `data` |
-| `find(data)` | `data: any` | `Node \| None` | Tìm node, trả về `None` nếu không có |
-| `traverse()` | — | `list` | Trả về list các `data` theo thứ tự |
+| `them_cuoi(du_lieu)` | `du_lieu: any` | `None` | Thêm vào cuối |
+| `them_dau(du_lieu)` | `du_lieu: any` | `None` | Thêm vào đầu |
+| `xoa(du_lieu)` | `du_lieu: any` | `None` | Xóa nút chứa `du_lieu` |
+| `tim(du_lieu)` | `du_lieu: any` | `Nut \| None` | Tìm nút, trả về `None` nếu không có |
+| `duyet()` | — | `list` | Trả về danh sách các `du_lieu` theo thứ tự |
 | `__len__()` | — | `int` | Số lượng phần tử |
 
 **Ví dụ sử dụng:**
 ```python
-dll = DoublyLinkedList()
-dll.append(sv1)
-dll.append(sv2)
-dll.traverse()     # → [sv1, sv2]
-dll.remove(sv1)
-len(dll)           # → 1
+ds = DanhSachLienKetDoi()
+ds.them_cuoi(sv1)
+ds.them_cuoi(sv2)
+ds.duyet()       # → [sv1, sv2]
+ds.xoa(sv1)
+len(ds)          # → 1
 ```
 
 ---
 
 ## Module: `data_structures/hash_set.py` — **P3**
 
-### Class `HashSet`
+### Lớp `TapHopBam`
 
 ```python
-HashSet(capacity: int = 16)
+TapHopBam(dung_luong: int = 16)
 ```
 
 | Hàm | Tham số | Trả về | Mô tả |
 |---|---|---|---|
-| `add(item)` | `item: any` | `None` | Thêm phần tử; bỏ qua nếu đã tồn tại |
-| `contains(item)` | `item: any` | `bool` | Kiểm tra tồn tại — O(1) trung bình |
-| `remove(item)` | `item: any` | `None` | Xóa phần tử |
+| `them(phan_tu)` | `phan_tu: any` | `None` | Thêm phần tử; bỏ qua nếu đã tồn tại |
+| `chua(phan_tu)` | `phan_tu: any` | `bool` | Kiểm tra tồn tại — O(1) trung bình |
+| `xoa(phan_tu)` | `phan_tu: any` | `None` | Xóa phần tử |
 
 **Ví dụ sử dụng:**
 ```python
-hs = HashSet()
-hs.add("CS101")
-hs.contains("CS101")    # → True
-hs.contains("CS999")    # → False
-hs.remove("CS101")
+tap = TapHopBam()
+tap.them("CS101")
+tap.chua("CS101")    # → True
+tap.chua("CS999")    # → False
+tap.xoa("CS101")
 ```
 
 ---
@@ -198,17 +198,17 @@ hs.remove("CS101")
 ## Module: `logic/kiem_tra.py` — **P4**
 
 ### Hàm `kiem_tra_tien_quyet(sv: SinhVien, mon: MonHoc) -> None`
-- Kiểm tra SV đã học môn tiên quyết chưa
-- **Raises:** `PrerequisiteNotMetError` nếu chưa học
+- Kiểm tra sinh viên đã học môn tiên quyết chưa
+- **Ngoại lệ:** `LoiChuaDuDieuKienTienQuyet` nếu chưa học
 
 ### Hàm `kiem_tra_xung_dot_lich(sv: SinhVien, lop_hp: LopHocPhan) -> None`
 - So sánh lịch `lop_hp` với tất cả lớp trong `sv.ds_mon_dang_ky`
-- **Raises:** `ScheduleConflictError` nếu trùng buổi/tiết
+- **Ngoại lệ:** `LoiXungDotLichHoc` nếu trùng buổi/tiết
 
 ### Hàm `kiem_tra_si_so(lop_hp: LopHocPhan) -> None`
-- **Raises:** `FullCapacityError` nếu `lop_hp.is_full()` = `True`
+- **Ngoại lệ:** `LoiLopHocDayCho` nếu `lop_hp.la_day()` = `True`
 
-### Exceptions (kế thừa từ `Exception`)
+### Các ngoại lệ (kế thừa từ `Exception`)
 
 ```python
 class LoiChuaDuDieuKienTienQuyet(Exception):
@@ -217,31 +217,31 @@ class LoiChuaDuDieuKienTienQuyet(Exception):
 class LoiXungDotLichHoc(Exception):
     # thong_bao: "Xung đột lịch với lớp: <ma_lop_hp>"
 
-class LoiLopHocDayChoĐ(Exception):
+class LoiLopHocDayCho(Exception):
     # thong_bao: "Lớp <ma_lop_hp> đã đủ sĩ số tối đa"
 ```
 
-**Ví dụ bắt exception (P2 dùng khi gọi đăng ký):**
+**Ví dụ bắt ngoại lệ (P2 dùng khi gọi đăng ký):**
 ```python
 try:
     kiem_tra_tien_quyet(sv, mon)
     kiem_tra_xung_dot_lich(sv, lop_hp)
     kiem_tra_si_so(lop_hp)
     sv.dang_ky(lop_hp)
-except (LoiChuaDuDieuKienTienQuyet, LoiXungDotLichHoc, LoiLopHocDayChoĐ) as e:
-    show_error_popup(str(e))   # gọi hàm P4 để hiển thị popup
+except (LoiChuaDuDieuKienTienQuyet, LoiXungDotLichHoc, LoiLopHocDayCho) as e:
+    hien_thi_popup_loi(str(e))   # gọi hàm P4 để hiển thị popup
 ```
 
 ---
 
 ## Module: `logic/file_handler.py` — **P5**
 
-### Hàm `save(he_thong: dict, duong_dan: str = "data/data.json") -> None`
+### Hàm `luu(he_thong: dict, duong_dan: str = "data/data.json") -> None`
 - Ghi trạng thái toàn bộ hệ thống ra file JSON
 
-### Hàm `load(duong_dan: str = "data/data.json") -> dict`
+### Hàm `tai(duong_dan: str = "data/data.json") -> dict`
 - Đọc JSON, tái tạo các đối tượng `MonHoc`, `LopHocPhan`, `SinhVien`
-- Trả về `dict` có 3 key: `"mon_hoc"`, `"lop_hoc_phan"`, `"sinh_vien"`
+- Trả về `dict` có 3 khóa: `"mon_hoc"`, `"lop_hoc_phan"`, `"sinh_vien"`
 
 ### Hàm `xuat_phieu_dang_ky(sv: SinhVien, dinh_dang: str = "pdf") -> str`
 - `dinh_dang`: `"pdf"` hoặc `"txt"`
@@ -249,32 +249,32 @@ except (LoiChuaDuDieuKienTienQuyet, LoiXungDotLichHoc, LoiLopHocDayChoĐ) as e:
 
 **Ví dụ sử dụng:**
 ```python
-save(he_thong)                          # lưu
-data = load()                           # tải
-path = xuat_phieu_dang_ky(sv, "pdf")   # xuất phiếu → "output/phieu_SV001.pdf"
+luu(he_thong)                          # lưu
+du_lieu = tai()                        # tải
+duong_dan = xuat_phieu_dang_ky(sv, "pdf")   # xuất phiếu → "output/phieu_SV001.pdf"
 ```
 
 ---
 
-## GUI: `gui/ui_constants.py` — **P1 (dùng chung)**
+## Giao diện: `gui/ui_constants.py` — **P1 (dùng chung)**
 
 ```python
 # Màu sắc
-PRIMARY_COLOR   = "#2563EB"   # xanh dương chủ đạo
-SECONDARY_COLOR = "#64748B"   # xám
-SUCCESS_COLOR   = "#16A34A"   # xanh lá (còn chỗ)
-ERROR_COLOR     = "#DC2626"   # đỏ (đầy / lỗi)
-BG_COLOR        = "#F8FAFC"   # nền trắng nhạt
+MAU_CHINH        = "#2563EB"   # xanh dương chủ đạo
+MAU_PHU          = "#64748B"   # xám
+MAU_THANH_CONG   = "#16A34A"   # xanh lá (còn chỗ)
+MAU_LOI          = "#DC2626"   # đỏ (đầy / lỗi)
+MAU_NEN          = "#F8FAFC"   # nền trắng nhạt
 
-# Font
-FONT_TITLE  = ("Arial", 16, "bold")
-FONT_BODY   = ("Arial", 12)
-FONT_SMALL  = ("Arial", 10)
+# Phông chữ
+FONT_TIEU_DE  = ("Arial", 16, "bold")
+FONT_THAN     = ("Arial", 12)
+FONT_NHO      = ("Arial", 10)
 
 # Kích thước
-BTN_WIDTH   = 120
-BTN_HEIGHT  = 35
-PADDING     = 10
+RONG_NUT      = 120
+CAO_NUT       = 35
+KHOANG_CACH   = 10
 ```
 
 ---
@@ -282,24 +282,24 @@ PADDING     = 10
 ## Luồng đăng ký tổng thể
 
 ```
-GUI (P2: nút "Đăng ký")
+Giao diện (P2: nút "Đăng ký")
     → kiem_tra_tien_quyet(sv, mon)      [P4]
     → kiem_tra_xung_dot_lich(sv, lop)   [P4]
     → kiem_tra_si_so(lop)               [P4]
     → sv.dang_ky(lop)                   [P2]
         → lop.them_sv(sv)               [P1]
-            → HashSet / DLL             [P3]
-    → save(he_thong)                    [P5]
+            → TapHopBam / DanhSachLienKetDoi   [P3]
+    → luu(he_thong)                     [P5]
     
-Nếu có Exception → show_error_popup()  [P4]
+Nếu có ngoại lệ → hien_thi_popup_loi()  [P4]
 ```
 
 ---
 
 ## Ghi chú & Quy ước chung
 
-- **Encoding:** UTF-8 cho tất cả file
-- **Import cấu trúc dữ liệu:** `from data_structures.doubly_linked_list import DoublyLinkedList`
-- **Import exception:** `from logic.kiem_tra import LoiChuaDuDieuKienTienQuyet, LoiXungDotLichHoc, LoiLopHocDayChoĐ`
-- **Mock data:** Xem `data/data_mau.py` (P2 cung cấp) để lấy dữ liệu mẫu test
-- **Deadline nội bộ ngày 13:** Tất cả nộp GUI draft cho P1 để ghép
+- **Mã hóa:** UTF-8 cho tất cả file
+- **Import cấu trúc dữ liệu:** `from data_structures.doubly_linked_list import DanhSachLienKetDoi`
+- **Import ngoại lệ:** `from logic.kiem_tra import LoiChuaDuDieuKienTienQuyet, LoiXungDotLichHoc, LoiLopHocDayCho`
+- **Dữ liệu mẫu:** Xem `data/data_mau.py` (P2 cung cấp) để lấy dữ liệu mẫu kiểm thử
+- **Hạn nội bộ ngày 13:** Tất cả nộp bản nháp giao diện cho P1 để ghép
