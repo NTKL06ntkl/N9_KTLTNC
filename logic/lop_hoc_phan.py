@@ -1,30 +1,65 @@
-class LoiLopHocDayCho(Exception):
-    pass
+# ============================================================
+# Module: logic/lop_hoc_phan.py  -- P1
+# Lop LopHocPhan: dai dien cho mot lop hoc phan (mot mon hoc
+# co the mo nhieu lop hoc phan khac nhau, moi lop co giang vien
+# va si so toi da rieng).
+# Xem chi tiet trong file INTERFACE.md, muc "logic/lop_hoc_phan.py"
+# ============================================================
+
 from data_structures.doubly_linked_list import DanhSachLienKetDoi
+from logic.kiem_tra import LoiLopHocDayCho
+
+
 class LopHocPhan:
-    def __init__(self, ma_lop_hp, mon_hoc, giang_vien, si_so_toi_da):
-        self.ma_lop_hp = ma_lop_hp          
-        self.mon_hoc = mon_hoc              
-        self.giang_vien = giang_vien        
-        self.si_so_toi_da = si_so_toi_da    
-        self.danh_sach_sv = DanhSachLienKetDoi() 
-        
-        self.lich_hoc = {"thu": 2, "tiet_bat_dau": 1, "tiet_ket_thuc": 3}
+    """
+    Thuoc tinh:
+        ma_lop_hp     : ma lop hoc phan, vi du "CS101-01"
+        mon_hoc       : object MonHoc (khong phai chi la ma mon)
+        giang_vien    : ten giang vien
+        si_so_toi_da  : so sinh vien toi da duoc dang ky vao lop
+        danh_sach_sv  : DanhSachLienKetDoi chua cac SinhVien da dang ky
+        lich_hoc      : dict dang {"thu": int, "tiet_bat_dau": int, "tiet_ket_thuc": int}
+    """
+
+    def __init__(self, ma_lop_hp, mon_hoc, giang_vien, si_so_toi_da, lich_hoc=None):
+        self.ma_lop_hp = ma_lop_hp
+        self.mon_hoc = mon_hoc
+        self.giang_vien = giang_vien
+        self.si_so_toi_da = si_so_toi_da
+
+        # Dung Danh sach lien ket doi (P3 cung cap) de luu sinh vien da dang ky
+        self.danh_sach_sv = DanhSachLienKetDoi()
+
+        # Neu khong truyen lich hoc thi dat lich mac dinh: Thu 2, tiet 1-3
+        if lich_hoc is None:
+            lich_hoc = {"thu": 2, "tiet_bat_dau": 1, "tiet_ket_thuc": 3}
+        self.lich_hoc = lich_hoc
+
+        # Trang thai mo / dong lop, ban dau mac dinh la dang mo
+        # (Admin trong phan giao dien se bat/tat trang thai nay)
+        self.dang_mo = True
 
     def la_day(self):
-        return len(self.danh_sach_sv) >= self.si_so_toi_da
+        """
+        Tra ve True neu so sinh vien hien tai >= si so toi da.
+        """
+        so_sv_hien_tai = len(self.danh_sach_sv)
+        return so_sv_hien_tai >= self.si_so_toi_da
 
     def them_sv(self, sv):
+        """
+        Them sinh vien vao danh_sach_sv.
+        Neu lop da day (la_day() == True) thi bao loi LoiLopHocDayCho.
+        """
         if self.la_day():
-            raise LoiLopHocDayCho("Lớp học phần đã đạt sĩ số tối đa!")
+            raise LoiLopHocDayCho(self.ma_lop_hp)
         self.danh_sach_sv.them_cuoi(sv)
 
     def xoa_sv(self, sv):
+        """
+        Xoa sinh vien khoi danh_sach_sv.
+        """
         self.danh_sach_sv.xoa(sv)
 
-    def hien_thi(self):
-        print("Mã lớp học phần:", self.ma_lop_hp)
-        print("Thuộc môn học:", self.mon_hoc.ten_mon)
-        print("Giảng viên:", self.giang_vien)
-        print("Sĩ số hiện tại:", len(self.danh_sach_sv), "/", self.si_so_toi_da)
-        print("Lịch học: Thứ", self.lich_hoc["thu"], "từ tiết", self.lich_hoc["tiet_bat_dau"], "đến", self.lich_hoc["tiet_ket_thuc"])
+    def __str__(self):
+        return self.ma_lop_hp + " - " + self.mon_hoc.ten_mon + " (GV: " + self.giang_vien + ")"
