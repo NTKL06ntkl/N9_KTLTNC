@@ -1,74 +1,71 @@
 # ============================================================
 # Module: gui/screen_mon_hoc.py  -- P1
-# Man hinh hien thi danh sach mon hoc trong he thong,
-# kem mon tien quyet cua tung mon (neu co).
 # ============================================================
 
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QTableWidget, QTableWidgetItem, QHeaderView,
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel,
+    QTableWidget, QTableWidgetItem, QHeaderView,
 )
 from PyQt6.QtCore import Qt
-
-from gui.ui_constants import STYLE_TIEU_DE, STYLE_NEN_TRANG
+from PyQt6.QtGui import QColor
 
 
 class ScreenMonHoc(QWidget):
-    """
-    Man hinh "Danh sach mon hoc".
-
-    Tham so:
-        he_thong : dict du lieu he thong, co khoa "mon_hoc" la list MonHoc
-    """
 
     def __init__(self, he_thong):
         super().__init__()
         self.he_thong = he_thong
-        self.setStyleSheet(STYLE_NEN_TRANG)
         self._tao_giao_dien()
 
     def _tao_giao_dien(self):
-        layout_chinh = QVBoxLayout(self)
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(16, 16, 16, 16)
+        layout.setSpacing(12)
 
-        tieu_de = QLabel("DANH SACH MON HOC")
-        tieu_de.setStyleSheet(STYLE_TIEU_DE)
-        tieu_de.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout_chinh.addWidget(tieu_de)
+        layout_top = QHBoxLayout()
+        tieu_de = QLabel("Danh sách môn học")
+        tieu_de.setStyleSheet("font-size: 16px; font-weight: 800; color: #F1F5F9;")
+        layout_top.addWidget(tieu_de)
+        layout_top.addStretch()
+        nhan_so = QLabel(str(len(self.he_thong["mon_hoc"])) + " môn học")
+        nhan_so.setStyleSheet(
+            "background-color: #334155; color: #94A3B8; border-radius: 10px;"
+            "padding: 3px 12px; font-size: 11px; font-weight: 700;"
+        )
+        layout_top.addWidget(nhan_so)
+        layout.addLayout(layout_top)
 
-        # Bang hien thi danh sach mon hoc bang QTableWidget
         self.bang = QTableWidget()
         self.bang.setColumnCount(4)
         self.bang.setHorizontalHeaderLabels(
-            ["Ma mon", "Ten mon", "So tin chi", "Mon tien quyet"]
+            ["Mã môn", "Tên môn học", "Số tín chỉ", "Môn tiên quyết"]
         )
         self.bang.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.bang.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.bang.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.bang.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.bang.verticalHeader().setVisible(False)
-        layout_chinh.addWidget(self.bang)
+        self.bang.setAlternatingRowColors(True)
+        self.bang.setShowGrid(False)
+        layout.addWidget(self.bang)
 
         self.cap_nhat_du_lieu()
 
     def cap_nhat_du_lieu(self):
-        """
-        Xoa toan bo du lieu cu trong bang va ve lai theo
-        danh sach mon hoc hien tai trong self.he_thong.
-        Goi ham nay moi khi danh sach mon hoc thay doi (P5 them mon moi).
-        """
-        # Tao tu dien tra cuu ten mon theo ma mon (de hien ten mon tien quyet)
-        tu_dien_ten_mon = {}
-        for mon in self.he_thong["mon_hoc"]:
-            tu_dien_ten_mon[mon.ma_mon] = mon.ten_mon
+        tu_dien = {m.ma_mon: m.ten_mon for m in self.he_thong["mon_hoc"]}
+        ds = self.he_thong["mon_hoc"]
+        self.bang.setRowCount(len(ds))
 
-        danh_sach_mon = self.he_thong["mon_hoc"]
-        self.bang.setRowCount(len(danh_sach_mon))
+        for hang, mon in enumerate(ds):
+            tq = ("—" if mon.ma_mon_tien_quyet is None
+                  else mon.ma_mon_tien_quyet + "  ·  " + tu_dien.get(mon.ma_mon_tien_quyet, ""))
 
-        for hang, mon in enumerate(danh_sach_mon):
-            if mon.ma_mon_tien_quyet is None:
-                chu_tien_quyet = "Khong co"
-            else:
-                ten_mon_tq = tu_dien_ten_mon.get(mon.ma_mon_tien_quyet, mon.ma_mon_tien_quyet)
-                chu_tien_quyet = mon.ma_mon_tien_quyet + " - " + ten_mon_tq
-
-            self.bang.setItem(hang, 0, QTableWidgetItem(mon.ma_mon))
-            self.bang.setItem(hang, 1, QTableWidgetItem(mon.ten_mon))
-            self.bang.setItem(hang, 2, QTableWidgetItem(str(mon.so_tin_chi)))
-            self.bang.setItem(hang, 3, QTableWidgetItem(chu_tien_quyet))
+            for cot, val in enumerate([mon.ma_mon, mon.ten_mon, str(mon.so_tin_chi), tq]):
+                o = QTableWidgetItem(val)
+                if cot == 2:
+                    o.setTextAlignment(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter)
+                    o.setForeground(QColor("#93C5FD"))
+                if cot == 3 and mon.ma_mon_tien_quyet:
+                    o.setForeground(QColor("#F59E0B"))
+                self.bang.setItem(hang, cot, o)
+            self.bang.setRowHeight(hang, 40)
