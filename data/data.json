@@ -1,53 +1,53 @@
 {
   "mon_hoc": [
     {
-      "ma_mon": "TOAN1",
-      "ten_mon": "Toan cao cap 1",
+      "ma_mon": "TINDC01",
+      "ten_mon": "Tin học đại cương ",
+      "so_tin_chi": 2,
+      "ma_mon_tien_quyet": null
+    },
+    {
+      "ma_mon": "TH01",
+      "ten_mon": "Triết học Mac-Lenin",
       "so_tin_chi": 3,
       "ma_mon_tien_quyet": null
     },
     {
-      "ma_mon": "TOAN2",
-      "ten_mon": "Toan cao cap 2",
-      "so_tin_chi": 3,
-      "ma_mon_tien_quyet": "TOAN1"
-    },
-    {
       "ma_mon": "CS101",
-      "ten_mon": "Lap trinh co ban",
+      "ten_mon": "Lập trình cơ bản",
       "so_tin_chi": 3,
       "ma_mon_tien_quyet": null
     },
     {
       "ma_mon": "CS201",
-      "ten_mon": "Cau truc du lieu",
+      "ten_mon": "Cấu trúc dữ liệu",
       "so_tin_chi": 3,
       "ma_mon_tien_quyet": "CS101"
     },
     {
       "ma_mon": "CS202",
-      "ten_mon": "Co so du lieu",
+      "ten_mon": "Cơ sở dữ liệu",
       "so_tin_chi": 3,
       "ma_mon_tien_quyet": "CS101"
     },
     {
       "ma_mon": "CS301",
-      "ten_mon": "Mang may tinh",
+      "ten_mon": "Mạng máy tính",
       "so_tin_chi": 3,
       "ma_mon_tien_quyet": "CS201"
     },
     {
       "ma_mon": "CS102",
-      "ten_mon": "Ngon ngu lap trinh",
+      "ten_mon": "Ngôn ngữ lập trình",
       "so_tin_chi": 2,
       "ma_mon_tien_quyet": "CS101"
     }
   ],
   "lop_hoc_phan": [
     {
-      "ma_lop_hp": "TOAN1-01",
-      "ma_mon": "TOAN1",
-      "giang_vien": "Nguyen Van An",
+      "ma_lop_hp": "TINDC01-01",
+      "ma_mon": "TINDC01",
+      "giang_vien": "Nguyễn Văn An",
       "si_so_toi_da": 40,
       "lich_hoc": {
         "thu": 2,
@@ -55,14 +55,12 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": [
-        "SV001"
-      ]
+      "ds_ma_sv": []
     },
     {
-      "ma_lop_hp": "TOAN2-01",
-      "ma_mon": "TOAN2",
-      "giang_vien": "Nguyen Van An",
+      "ma_lop_hp": "TH01-01",
+      "ma_mon": "TH01",
+      "giang_vien": "Nguyễn Văn An",
       "si_so_toi_da": 40,
       "lich_hoc": {
         "thu": 3,
@@ -70,14 +68,12 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": [
-        "SV001"
-      ]
+      "ds_ma_sv": []
     },
     {
       "ma_lop_hp": "CS101-01",
       "ma_mon": "CS101",
-      "giang_vien": "Tran Thi Binh",
+      "giang_vien": "Trần Thị Bình",
       "si_so_toi_da": 3,
       "lich_hoc": {
         "thu": 4,
@@ -85,14 +81,12 @@
         "tiet_ket_thuc": 6
       },
       "dang_mo": true,
-      "ds_ma_sv": [
-        "SV001"
-      ]
+      "ds_ma_sv": []
     },
     {
       "ma_lop_hp": "CS201-01",
       "ma_mon": "CS201",
-      "giang_vien": "Le Minh Cuong",
+      "giang_vien": "Lê Minh Cường",
       "si_so_toi_da": 40,
       "lich_hoc": {
         "thu": 5,
@@ -100,14 +94,12 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": [
-        "SV001"
-      ]
+      "ds_ma_sv": []
     },
     {
       "ma_lop_hp": "CS202-01",
       "ma_mon": "CS202",
-      "giang_vien": "Pham Thi Dung",
+      "giang_vien": "Phạm Thị Dung",
       "si_so_toi_da": 40,
       "lich_hoc": {
         "thu": 6,
@@ -115,14 +107,12 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": [
-        "SV001"
-      ]
+      "ds_ma_sv": []
     },
     {
       "ma_lop_hp": "CS301-01",
       "ma_mon": "CS301",
-      "giang_vien": "Hoang Van Em",
+      "giang_vien": "Hoàng Văn Em",
       "si_so_toi_da": 40,
       "lich_hoc": {
         "thu": 2,
@@ -135,7 +125,7 @@
     {
       "ma_lop_hp": "CS102-01",
       "ma_mon": "CS102",
-      "giang_vien": "Dang Van Quan",
+      "giang_vien": "Đặng Văn Quân",
       "si_so_toi_da": 40,
       "lich_hoc": {
         "thu": 4,
@@ -149,24 +139,18 @@
   "sinh_vien": [
     {
       "ma_sv": "SV001",
-      "ho_ten": "Nguyen Thanh Hai",
-      "lop_sh": "CNTT01",
+      "ho_ten": "Nguyễn Thanh Hải",
+      "lop_sh": "TIN01",
       "diem_cac_mon": {
         "TOAN1": 8.5,
         "CS101": 9.0
       },
-      "ds_ma_lop_dang_ky": [
-        "TOAN1-01",
-        "TOAN2-01",
-        "CS101-01",
-        "CS201-01",
-        "CS202-01"
-      ]
+      "ds_ma_lop_dang_ky": []
     },
     {
       "ma_sv": "SV002",
-      "ho_ten": "Tran Thi Mai Linh",
-      "lop_sh": "CNTT01",
+      "ho_ten": "Trần Thị Mai Linh",
+      "lop_sh": "TIN01",
       "diem_cac_mon": {
         "CS101": 7.5
       },
@@ -174,15 +158,15 @@
     },
     {
       "ma_sv": "SV003",
-      "ho_ten": "Le Quoc Bao",
-      "lop_sh": "CNTT02",
+      "ho_ten": "Lê Quốc Bảo",
+      "lop_sh": "TIN02",
       "diem_cac_mon": {},
       "ds_ma_lop_dang_ky": []
     },
     {
       "ma_sv": "SV004",
-      "ho_ten": "Pham Ngoc Huong",
-      "lop_sh": "CNTT02",
+      "ho_ten": "Phạm Ngọc Hương",
+      "lop_sh": "TIN02",
       "diem_cac_mon": {
         "TOAN1": 7.0
       },
