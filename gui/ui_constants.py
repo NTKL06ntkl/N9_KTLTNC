@@ -1,9 +1,9 @@
 # ============================================================
 # Module: gui/ui_constants.py  -- P1
-# Theme tối hiện đại
+# Giao diện sáng thanh lịch - Đã đồng bộ F-String hoàn toàn
 # ============================================================
 
-# Màu sắc
+# ── Hệ màu sắc đồng bộ (Màu bạn đã chọn) ──────────────────────
 MAU_NEN_CHINH   = "#F8FAFC"   # Trắng xám nhẹ (Slate 50)
 MAU_NEN_CARD    = "#FFFFFF"   # Khung nội dung màu trắng tinh
 MAU_NEN_INPUT   = "#F1F5F9"   # Ô nhập liệu xám nhạt
@@ -22,197 +22,197 @@ MAU_CHU_CHINH   = "#0F172A"   # CHỮ ĐEN XÁM ĐẬM
 MAU_CHU_MO      = "#64748B"   # Chữ phụ mờ
 MAU_HANG_CHAN   = "#F1F5F9"   # Dòng chẵn bảng xen kẽ xám nhạt
 
-# Font
+# ── Cấu hình Font ───────────────────────────────────────────
 TEN_FONT     = "Segoe UI"
 CO_TIEU_DE   = 18
 CO_THAN      = 13
 CO_NHO       = 11
 
-# ── Stylesheet toàn cục ──────────────────────────────────────
-GLOBAL_STYLE = """
-QMainWindow, QWidget {
-    background-color: #0F172A;
-    color: #F1F5F9;
-    font-family: "Segoe UI";
-    font-size: 13px;
-}
+# ── Stylesheet toàn cục (Đã thay f-string để nhận màu mới) ──
+GLOBAL_STYLE = f"""
+QMainWindow, QWidget {{
+    background-color: {MAU_NEN_CHINH};
+    color: {MAU_CHU_CHINH};
+    font-family: "{TEN_FONT}";
+    font-size: {CO_THAN}px;
+}}
 
 /* ── Tab ── */
-QTabWidget::pane {
-    border: 1px solid #334155;
+QTabWidget::pane {{
+    border: 1px solid {MAU_VIEN};
     border-radius: 8px;
-    background-color: #1E293B;
-}
-QTabBar::tab {
-    background: #0F172A;
-    color: #94A3B8;
+    background-color: {MAU_NEN_CARD};
+}}
+QTabBar::tab {{
+    background: {MAU_NEN_CHINH};
+    color: {MAU_CHU_MO};
     padding: 10px 22px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     margin-right: 3px;
     font-weight: 600;
-}
-QTabBar::tab:selected {
-    background: #1E293B;
-    color: #3B82F6;
-    border-top: 2px solid #3B82F6;
-}
-QTabBar::tab:hover:!selected { background: #1E293B; color: #F1F5F9; }
+}}
+QTabBar::tab:selected {{
+    background: {MAU_NEN_CARD};
+    color: {MAU_CHINH};
+    border-top: 2px solid {MAU_CHINH};
+}}
+QTabBar::tab:hover:!selected {{ background: {MAU_NEN_CARD}; color: {MAU_CHU_CHINH}; }}
 
 /* ── Bảng ── */
-QTableWidget {
-    background-color: #1E293B;
-    alternate-background-color: #1A2744;
-    border: 1px solid #334155;
+QTableWidget {{
+    background-color: {MAU_NEN_CARD};
+    alternate-background-color: {MAU_HANG_CHAN};
+    border: 1px solid {MAU_VIEN};
     border-radius: 8px;
-    gridline-color: #2D3F55;
+    gridline-color: {MAU_VIEN};
     outline: none;
-    color: #F1F5F9;
-}
-QTableWidget::item {
+    color: {MAU_CHU_CHINH};
+}}
+QTableWidget::item {{
     padding: 8px 12px;
     border: none;
-}
-QTableWidget::item:selected {
-    background-color: #1E3A5F;
-    color: #93C5FD;
-}
-QHeaderView::section {
-    background-color: #0F172A;
-    color: #94A3B8;
+}}
+QTableWidget::item:selected {{
+    background-color: #E0F2FE;
+    color: {MAU_CHINH};
+}}
+QHeaderView::section {{
+    background-color: {MAU_NEN_CHINH};
+    color: {MAU_CHU_MO};
     font-weight: 700;
-    font-size: 11px;
+    font-size: {CO_NHO}px;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 10px 12px;
     border: none;
-    border-bottom: 2px solid #3B82F6;
-}
+    border-bottom: 2px solid {MAU_CHINH};
+}}
 
 /* ── Input ── */
-QLineEdit, QComboBox {
-    background-color: #334155;
-    border: 1px solid #475569;
+QLineEdit, QComboBox {{
+    background-color: {MAU_NEN_INPUT};
+    border: 1px solid {MAU_VIEN};
     border-radius: 6px;
     padding: 7px 12px;
-    color: #F1F5F9;
-    selection-background-color: #3B82F6;
-}
-QLineEdit:focus, QComboBox:focus {
-    border: 1px solid #3B82F6;
-    background-color: #3D4F65;
-}
-QComboBox::drop-down { border: none; width: 20px; }
-QComboBox QAbstractItemView {
-    background-color: #1E293B;
-    border: 1px solid #334155;
-    selection-background-color: #3B82F6;
-    color: #F1F5F9;
+    color: {MAU_CHU_CHINH};
+    selection-background-color: {MAU_CHINH};
+}}
+QLineEdit:focus, QComboBox:focus {{
+    border: 1px solid {MAU_CHINH};
+    background-color: {MAU_NEN_INPUT_FOCUS};
+}}
+QComboBox::drop-down {{ border: none; width: 20px; }}
+QComboBox QAbstractItemView {{
+    background-color: {MAU_NEN_CARD};
+    border: 1px solid {MAU_VIEN};
+    selection-background-color: {MAU_CHINH};
+    color: {MAU_CHU_CHINH};
     padding: 4px;
-}
+}}
 
 /* ── GroupBox ── */
-QGroupBox {
-    border: 1px solid #334155;
+QGroupBox {{
+    border: 1px solid {MAU_VIEN};
     border-radius: 8px;
     margin-top: 16px;
     padding: 16px 12px 12px 12px;
-    color: #94A3B8;
+    color: {MAU_CHU_MO};
     font-weight: 600;
-}
-QGroupBox::title {
+}}
+QGroupBox::title {{
     subcontrol-origin: margin;
     left: 14px;
     padding: 0 6px;
-    color: #3B82F6;
+    color: {MAU_CHINH};
     font-size: 12px;
-}
+}}
 
 /* ── ScrollBar ── */
-QScrollBar:vertical {
-    background: #1E293B; width: 6px; border-radius: 3px;
-}
-QScrollBar::handle:vertical {
-    background: #475569; border-radius: 3px; min-height: 30px;
-}
-QScrollBar:horizontal {
-    background: #1E293B; height: 6px; border-radius: 3px;
-}
-QScrollBar::handle:horizontal {
-    background: #475569; border-radius: 3px;
-}
-QScrollBar::add-line, QScrollBar::sub-line { height:0; width:0; }
+QScrollBar:vertical {{
+    background: {MAU_NEN_INPUT}; width: 6px; border-radius: 3px;
+}}
+QScrollBar::handle:vertical {{
+    background: {MAU_VIEN}; border-radius: 3px; min-height: 30px;
+}}
+QScrollBar:horizontal {{
+    background: {MAU_NEN_INPUT}; height: 6px; border-radius: 3px;
+}}
+QScrollBar::handle:horizontal {{
+    background: {MAU_VIEN}; border-radius: 3px;
+}}
+QScrollBar::add-line, QScrollBar::sub-line {{ height:0; width:0; }}
 
 /* ── Message Box ── */
-QMessageBox { background-color: #1E293B; }
-QMessageBox QLabel { color: #F1F5F9; font-size: 13px; }
-QMessageBox QPushButton {
-    background-color: #3B82F6; color: white;
+QMessageBox {{ background-color: {MAU_NEN_CARD}; }}
+QMessageBox QLabel {{ color: {MAU_CHU_CHINH}; font-size: {CO_THAN}px; }}
+QMessageBox QPushButton {{
+    background-color: {MAU_CHINH}; color: white;
     border-radius: 6px; padding: 6px 20px; min-width: 80px;
-}
-QMessageBox QPushButton:hover { background-color: #2563EB; }
+}}
+QMessageBox QPushButton:hover {{ background-color: {MAU_CHINH_HOVER}; }}
 """
 
 # ── Stylesheet cho từng loại nút ────────────────────────────
-STYLE_NUT_CHINH = """
-QPushButton {
-    background-color: #3B82F6; color: white; font-weight: 700;
-    border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px;
-}
-QPushButton:hover { background-color: #2563EB; }
-QPushButton:pressed { background-color: #1D4ED8; }
+STYLE_NUT_CHINH = f"""
+QPushButton {{
+    background-color: {MAU_CHINH}; color: white; font-weight: 700;
+    border: none; border-radius: 8px; padding: 10px 20px; font-size: {CO_THAN}px;
+}}
+QPushButton:hover {{ background-color: {MAU_CHINH_HOVER}; }}
+QPushButton:pressed {{ background-color: {MAU_CHINH_PRESS}; }}
 """
 
-STYLE_NUT_THANH_CONG = """
-QPushButton {
-    background-color: #10B981; color: white; font-weight: 700;
-    border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px;
-}
-QPushButton:hover { background-color: #059669; }
-QPushButton:pressed { background-color: #047857; }
+STYLE_NUT_THANH_CONG = f"""
+QPushButton {{
+    background-color: {MAU_THANH_CONG}; color: white; font-weight: 700;
+    border: none; border-radius: 8px; padding: 10px 20px; font-size: {CO_THAN}px;
+}}
+QPushButton:hover {{ background-color: #059669; }}
+QPushButton:pressed {{ background-color: #047857; }}
 """
 
-STYLE_NUT_LOI = """
-QPushButton {
-    background-color: #EF4444; color: white; font-weight: 700;
-    border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px;
-}
-QPushButton:hover { background-color: #DC2626; }
-QPushButton:pressed { background-color: #B91C1C; }
+STYLE_NUT_LOI = f"""
+QPushButton {{
+    background-color: {MAU_LOI}; color: white; font-weight: 700;
+    border: none; border-radius: 8px; padding: 10px 20px; font-size: {CO_THAN}px;
+}}
+QPushButton:hover {{ background-color: #DC2626; }}
+QPushButton:pressed {{ background-color: #B91C1C; }}
 """
 
-STYLE_NUT_PHU = """
-QPushButton {
-    background-color: #475569; color: white; font-weight: 700;
-    border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px;
-}
-QPushButton:hover { background-color: #64748B; }
-QPushButton:pressed { background-color: #334155; }
+STYLE_NUT_PHU = f"""
+QPushButton {{
+    background-color: {MAU_PHU}; color: white; font-weight: 700;
+    border: none; border-radius: 8px; padding: 10px 20px; font-size: {CO_THAN}px;
+}}
+QPushButton:hover {{ background-color: #4B5563; }}
+QPushButton:pressed {{ background-color: #374151; }}
 """
 
-STYLE_NUT_OUTLINE = """
-QPushButton {
-    background-color: transparent; color: #3B82F6; font-weight: 700;
-    border: 2px solid #3B82F6; border-radius: 8px; padding: 8px 20px; font-size: 13px;
-}
-QPushButton:hover { background-color: #1E3A5F; }
+STYLE_NUT_OUTLINE = f"""
+QPushButton {{
+    background-color: transparent; color: {MAU_CHINH}; font-weight: 700;
+    border: 2px solid {MAU_CHINH}; border-radius: 8px; padding: 8px 20px; font-size: {CO_THAN}px;
+}}
+QPushButton:hover {{ background-color: #E0F2FE; }}
 """
 
 STYLE_TIEU_DE = (
-    "font-size: 18px; font-weight: 800; color: #F1F5F9; letter-spacing: 1px;"
+    f"font-size: {CO_TIEU_DE}px; font-weight: 800; color: {MAU_CHU_CHINH}; letter-spacing: 1px;"
 )
 
-STYLE_NEN_TRANG = "background-color: #0F172A;"
+STYLE_NEN_TRANG = f"background-color: {MAU_NEN_CHINH};"
 
-STYLE_THANH_THONG_TIN = """
-    background-color: #1E293B;
-    color: #93C5FD;
-    font-size: 13px;
+STYLE_THANH_THONG_TIN = f"""
+    background-color: {MAU_NEN_INPUT};
+    color: {MAU_CHINH};
+    font-size: {CO_THAN}px;
     font-weight: 600;
     padding: 12px 20px;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid {MAU_VIEN};
 """
 
-CO_CHU_THAN = 13
-CO_CHU_NHO  = 11
-
+# Giữ lại để tránh lỗi tương thích ngược với file screen_sinh_vien.py
+CO_CHU_THAN = CO_THAN
+CO_CHU_NHO  = CO_NHO
