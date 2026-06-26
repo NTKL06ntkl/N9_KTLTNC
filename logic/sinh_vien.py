@@ -22,15 +22,8 @@ class SinhVien:
         self.ma_sv = ma_sv
         self.ho_ten = ho_ten
         self.lop_sh = lop_sh
-
-        # Tap hop cac ma mon da hoc xong (dung Hash Set de tra cuu nhanh)
         self.ds_mon_da_hoc = TapHopBam()
-
-        # Danh sach cac lop hoc phan dang dang ky (dung Danh sach lien ket doi)
         self.ds_mon_dang_ky = DanhSachLienKetDoi()
-
-        # Tu dien luu diem cua tung mon da hoc, dung de tinh diem trung binh
-        # vi du: {"CS101": 8.5, "CS201": 7.0}
         self.diem_cac_mon = {}
 
     def them_mon_da_hoc(self, ma_mon, diem):

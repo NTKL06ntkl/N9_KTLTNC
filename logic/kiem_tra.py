@@ -1,8 +1,3 @@
-# ============================================================
-# Module: logic/kiem_tra.py  -- P4
-# ============================================================
-
-
 class LoiChuaDuDieuKienTienQuyet(Exception):
     def __init__(self, ten_mon):
         self.ten_mon = ten_mon

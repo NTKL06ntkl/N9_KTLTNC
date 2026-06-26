@@ -1,11 +1,3 @@
-# ============================================================
-# Module: logic/lop_hoc_phan.py  -- P1
-# Lop LopHocPhan: dai dien cho mot lop hoc phan (mot mon hoc
-# co the mo nhieu lop hoc phan khac nhau, moi lop co giang vien
-# va si so toi da rieng).
-# Xem chi tiet trong file INTERFACE.md, muc "logic/lop_hoc_phan.py"
-# ============================================================
-
 from data_structures.doubly_linked_list import DanhSachLienKetDoi
 from logic.kiem_tra import LoiLopHocDayCho
 
