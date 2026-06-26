@@ -41,6 +41,12 @@
       "ten_mon": "Ngôn ngữ lập trình",
       "so_tin_chi": 2,
       "ma_mon_tien_quyet": "CS101"
+    },
+    {
+      "ma_mon": "LT01",
+      "ten_mon": "Lập trình hướng đối tượng",
+      "so_tin_chi": 3,
+      "ma_mon_tien_quyet": "CS202"
     }
   ],
   "lop_hoc_phan": [
@@ -55,7 +61,11 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": []
+      "ds_ma_sv": [
+        "SV001",
+        "SV003",
+        "SV002"
+      ]
     },
     {
       "ma_lop_hp": "TH01-01",
@@ -68,7 +78,10 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": []
+      "ds_ma_sv": [
+        "SV002",
+        "SV001"
+      ]
     },
     {
       "ma_lop_hp": "CS101-01",
@@ -94,7 +107,9 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": []
+      "ds_ma_sv": [
+        "SV001"
+      ]
     },
     {
       "ma_lop_hp": "CS202-01",
@@ -134,6 +149,45 @@
       },
       "dang_mo": true,
       "ds_ma_sv": []
+    },
+    {
+      "ma_lop_hp": "TIN02",
+      "ma_mon": "TINDC01",
+      "giang_vien": "Nguyễn Văn An",
+      "si_so_toi_da": 20,
+      "lich_hoc": {
+        "thu": 7,
+        "tiet_bat_dau": 7,
+        "tiet_ket_thuc": 9
+      },
+      "dang_mo": true,
+      "ds_ma_sv": []
+    },
+    {
+      "ma_lop_hp": "TH02",
+      "ma_mon": "TH01",
+      "giang_vien": "Lê Thị Thu",
+      "si_so_toi_da": 50,
+      "lich_hoc": {
+        "thu": 3,
+        "tiet_bat_dau": 1,
+        "tiet_ket_thuc": 3
+      },
+      "dang_mo": true,
+      "ds_ma_sv": []
+    },
+    {
+      "ma_lop_hp": "LTCB02",
+      "ma_mon": "CS101",
+      "giang_vien": "Trịnh Nga",
+      "si_so_toi_da": 40,
+      "lich_hoc": {
+        "thu": 3,
+        "tiet_bat_dau": 1,
+        "tiet_ket_thuc": 3
+      },
+      "dang_mo": true,
+      "ds_ma_sv": []
     }
   ],
   "sinh_vien": [
@@ -145,7 +199,11 @@
         "TOAN1": 8.5,
         "CS101": 9.0
       },
-      "ds_ma_lop_dang_ky": []
+      "ds_ma_lop_dang_ky": [
+        "TINDC01-01",
+        "CS201-01",
+        "TH01-01"
+      ]
     },
     {
       "ma_sv": "SV002",
@@ -154,22 +212,25 @@
       "diem_cac_mon": {
         "CS101": 7.5
       },
-      "ds_ma_lop_dang_ky": []
+      "ds_ma_lop_dang_ky": [
+        "TINDC01-01",
+        "TH01-01"
+      ]
     },
     {
       "ma_sv": "SV003",
       "ho_ten": "Lê Quốc Bảo",
       "lop_sh": "TIN02",
       "diem_cac_mon": {},
-      "ds_ma_lop_dang_ky": []
+      "ds_ma_lop_dang_ky": [
+        "TINDC01-01"
+      ]
     },
     {
       "ma_sv": "SV004",
-      "ho_ten": "Phạm Ngọc Hương",
-      "lop_sh": "TIN02",
-      "diem_cac_mon": {
-        "TOAN1": 7.0
-      },
+      "ho_ten": "Lê Thu Hà",
+      "lop_sh": "TIN01",
+      "diem_cac_mon": {},
       "ds_ma_lop_dang_ky": []
     }
   ]
