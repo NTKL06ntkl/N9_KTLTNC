@@ -1,7 +1,3 @@
-# ============================================================
-# Module: gui/main_window.py  -- P1
-# ============================================================
-
 from PyQt6.QtWidgets import (
     QMainWindow, QStackedWidget, QWidget, QVBoxLayout,
     QPushButton, QHBoxLayout, QLabel,

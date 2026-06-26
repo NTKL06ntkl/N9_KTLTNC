@@ -26,17 +26,10 @@ class LopHocPhan:
         self.mon_hoc = mon_hoc
         self.giang_vien = giang_vien
         self.si_so_toi_da = si_so_toi_da
-
-        # Dung Danh sach lien ket doi (P3 cung cap) de luu sinh vien da dang ky
         self.danh_sach_sv = DanhSachLienKetDoi()
-
-        # Neu khong truyen lich hoc thi dat lich mac dinh: Thu 2, tiet 1-3
         if lich_hoc is None:
             lich_hoc = {"thu": 2, "tiet_bat_dau": 1, "tiet_ket_thuc": 3}
         self.lich_hoc = lich_hoc
-
-        # Trang thai mo / dong lop, ban dau mac dinh la dang mo
-        # (Admin trong phan giao dien se bat/tat trang thai nay)
         self.dang_mo = True
 
     def la_day(self):

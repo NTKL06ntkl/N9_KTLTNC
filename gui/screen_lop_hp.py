@@ -1,7 +1,3 @@
-# ============================================================
-# Module: gui/screen_lop_hp.py  -- P1
-# ============================================================
-
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
     QTableWidget, QTableWidgetItem, QHeaderView,
