@@ -1,7 +1,3 @@
-# ============================================================
-# Module: gui/screen_mon_hoc.py  -- P1
-# ============================================================
-
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
     QTableWidget, QTableWidgetItem, QHeaderView,
@@ -15,7 +11,7 @@ class ScreenMonHoc(QWidget):
     def __init__(self, he_thong):
         super().__init__()
         self.he_thong = he_thong
-        self._tao_giao_dien()
+        self._tao_giáo_dien()
 
     def _tao_giao_dien(self):
         layout = QVBoxLayout(self)

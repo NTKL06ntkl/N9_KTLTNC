@@ -1,10 +1,3 @@
-# ============================================================
-# Module: logic/mon_hoc.py  -- P1
-# Lop MonHoc: dai dien cho mot mon hoc trong chuong trinh dao tao.
-# Xem chi tiet trong file INTERFACE.md, muc "logic/mon_hoc.py"
-# ============================================================
-
-
 class MonHoc:
     """
     Lop MonHoc dung de luu thong tin cua mot mon hoc.
@@ -23,5 +16,5 @@ class MonHoc:
         self.ma_mon_tien_quyet = ma_mon_tien_quyet
 
     def __str__(self):
-        # Khi in object ra man hinh se hien thi dang nay
+        # dùng định dạng chuỗi để hiển thị đối tượng
         return self.ma_mon + " - " + self.ten_mon + " (" + str(self.so_tin_chi) + " TC)"

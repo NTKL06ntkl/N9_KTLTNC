@@ -122,7 +122,9 @@
         "tiet_ket_thuc": 3
       },
       "dang_mo": true,
-      "ds_ma_sv": []
+      "ds_ma_sv": [
+        "SV002"
+      ]
     },
     {
       "ma_lop_hp": "CS301-01",
@@ -201,8 +203,8 @@
       },
       "ds_ma_lop_dang_ky": [
         "TINDC01-01",
-        "CS201-01",
-        "TH01-01"
+        "TH01-01",
+        "CS201-01"
       ]
     },
     {
@@ -214,7 +216,8 @@
       },
       "ds_ma_lop_dang_ky": [
         "TINDC01-01",
-        "TH01-01"
+        "TH01-01",
+        "CS202-01"
       ]
     },
     {
